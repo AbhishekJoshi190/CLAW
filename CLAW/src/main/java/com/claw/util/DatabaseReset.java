@@ -22,7 +22,7 @@ public class DatabaseReset {
         System.out.println("CLAW System: Starting Database Reset...");
 
         try (Connection conn = DriverManager.getConnection(MYSQL_URL, USER, PASSWORD);
-             Statement stmt = conn.createStatement()) {
+                Statement stmt = conn.createStatement()) {
 
             System.out.println("Connected to MySQL Server.");
 

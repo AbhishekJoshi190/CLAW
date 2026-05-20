@@ -1,4 +1,3 @@
-
 package com.claw.model;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class Order {
      * Constructor to initialize a new Order with all required details.
      */
     public Order(User user, String streetAddress, String city, String postalCode, String phone, String email,
-                 String itemsSummary, int totalAmount, int potentialPoints, String paymentMethod) {
+            String itemsSummary, int totalAmount, int potentialPoints, String paymentMethod) {
 
         // Generate a random unique ID for the order (e.g. "A1B2C3D4")
         this.id = UUID.randomUUID().toString().substring(0, 8).toUpperCase();

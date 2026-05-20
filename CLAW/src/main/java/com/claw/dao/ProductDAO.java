@@ -20,8 +20,8 @@ public class ProductDAO {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM products";
         try (Connection conn = DBUtil.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 products.add(new Product(
@@ -49,7 +49,7 @@ public class ProductDAO {
         List<Product> products = new ArrayList<>();
         String sql = "SELECT * FROM products WHERE category = ?";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, category);
             ResultSet rs = stmt.executeQuery();
@@ -72,14 +72,14 @@ public class ProductDAO {
 
     /**
      * Grabs a list of products filtered by category and search keyword.
-     * We build the SQL query dynamically and safely use PreparedStatements
-     * to shut down any sneaky SQL injection attempts. If our primary database
+     * We build the SQL query dynamically and safely use PreparedStatements 
+     * to shut down any sneaky SQL injection attempts. If our primary database 
      * goes down, this gracefully drops back to our in-memory MockDatabase.
      */
     public List<Product> findFiltered(String category, String query) {
         List<Product> products = new ArrayList<>();
-
-        // Start building the query. Using "WHERE 1=1" is a handy trick that lets
+        
+        // Start building the query. Using "WHERE 1=1" is a handy trick that lets 
         // us append dynamic "AND" conditions without worrying about SQL syntax errors.
         StringBuilder sql = new StringBuilder("SELECT * FROM products WHERE 1=1");
         List<Object> params = new ArrayList<>();
@@ -129,7 +129,7 @@ public class ProductDAO {
     public Product findById(String id) {
         String sql = "SELECT * FROM products WHERE id = ?";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -155,7 +155,7 @@ public class ProductDAO {
     public void insertAll(List<Product> products) {
         String sql = "INSERT IGNORE INTO products (id, name, price, category, image_url) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             conn.setAutoCommit(false);
             for (Product p : products) {

@@ -64,3 +64,4 @@ CREATE TABLE IF NOT EXISTS system_logs (
 INSERT INTO users (username, email, password, is_admin)
 VALUES ('Admin', 'admin@claw.com', '$2a$10$CwrNCO5ukNFjJvQ80GF3LOwgyOKEFW87daDJlBGoi2gEJgT9mjOIe', TRUE)
 ON DUPLICATE KEY UPDATE is_admin = TRUE;
+

@@ -22,7 +22,7 @@ public class OrderDAO {
                 +
                 "VALUES (?, (SELECT id FROM users WHERE email = ?), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, order.getId());
             stmt.setString(2, order.getUser().getEmail()); // Link via email to get ID
@@ -67,8 +67,8 @@ public class OrderDAO {
         String sql = "SELECT o.*, u.username as u_name, u.email as u_email FROM orders o " +
                 "LEFT JOIN users u ON o.user_id = u.id ORDER BY o.created_at DESC";
         try (Connection conn = DBUtil.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 // Reconstruct User object for the order
@@ -102,7 +102,7 @@ public class OrderDAO {
     public boolean updateStatus(String id, String status) {
         String sql = "UPDATE orders SET status = ? WHERE id = ?";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, status);
             stmt.setString(2, id);
@@ -121,7 +121,7 @@ public class OrderDAO {
         String sql = "SELECT o.*, u.username as u_name, u.email as u_email FROM orders o " +
                 "LEFT JOIN users u ON o.user_id = u.id WHERE o.id = ?";
         try (Connection conn = DBUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -149,4 +149,3 @@ public class OrderDAO {
         return null;
     }
 }
-

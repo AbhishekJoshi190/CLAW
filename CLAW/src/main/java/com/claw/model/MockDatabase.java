@@ -73,7 +73,7 @@ public class MockDatabase {
 
     /**
      * Filters products by category and searches case-insensitively by keyword.
-     *
+     * 
      * @param category The selected category (e.g. "shirts", "pants"). If null/empty or "all", all items are considered.
      * @param query The search term. If provided, filters items containing this keyword case-insensitively.
      * @return List of matching Products.
@@ -81,12 +81,12 @@ public class MockDatabase {
     public static List<Product> findFiltered(String category, String query) {
         // Step 1: Pre-filter products by category using the existing helper method
         List<Product> list = getProductsByCategory(category);
-
+        
         // Step 2: If search keyword is blank, return the category results directly
         if (query == null || query.trim().isEmpty()) {
             return list;
         }
-
+        
         // Step 3: Perform case-insensitive search on the product names
         final String lowerQuery = query.toLowerCase().trim();
         return list.stream()
@@ -179,14 +179,14 @@ public class MockDatabase {
                 new java.sql.Timestamp(now - 3600000L * 2))); // 2 hours ago
         auditLogs.add(new AuditLog(3, "john@gmail.com", "Registration",
                 "New user registered: john@gmail.com (Username: JohnDoe).", new java.sql.Timestamp(now - 5400000L))); // 1.5
-        // hours
-        // ago
+                                                                                                                      // hours
+                                                                                                                      // ago
         auditLogs.add(new AuditLog(4, "john@gmail.com", "Login", "User logged in: john@gmail.com.",
                 new java.sql.Timestamp(now - 4320000L))); // 1.2 hours ago
         auditLogs.add(new AuditLog(5, "john@gmail.com", "Order Placed",
                 "Order #7D4F28E1 placed via Card payment for NPR 8,500.00.", new java.sql.Timestamp(now - 1800000L))); // 30
-        // mins
-        // ago
+                                                                                                                       // mins
+                                                                                                                       // ago
         auditLogs.add(new AuditLog(6, "admin@claw.com", "Order Delivered",
                 "Marked Order #7D4F28E1 as DELIVERED and awarded 85 reward points.",
                 new java.sql.Timestamp(now - 600000L))); // 10 mins ago
