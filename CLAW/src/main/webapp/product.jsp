@@ -12,7 +12,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             background-color: #f5f5f5;
         }
-
+         /* Styles the main product image */
         .main-product-img {
             width: 100%;
             display: block;
