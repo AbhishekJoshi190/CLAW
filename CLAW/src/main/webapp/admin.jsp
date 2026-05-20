@@ -650,6 +650,85 @@
 
                             <!-- ORDERS MANAGEMENT TABLE -->
                             <h2>Recent Transactions</h2>
+                            <div class="table-responsive" style="margin-bottom: 4rem;">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Customer</th>
+                                            <th>Items Summary</th>
+                                            <th>Total Amount</th>
+                                            <th>Method</th>
+                                            <th>Shipping & Delivery Address</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:choose>
+                                            <c:when test="${empty orders}">
+                                                <tr>
+                                                    <td colspan="8"
+                                                        style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                                                        No transaction records placed yet.
+                                                    </td>
+                                                </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:forEach items="${orders}" var="order">
+                                                    <tr>
+                                                        <td
+                                                            style="font-family: monospace; font-weight: bold; color: var(--accent);">
+                                                            #${order.id}</td>
+                                                        <td><strong>${order.user.username}</strong></td>
+                                                        <td style="max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                                            title="${order.itemsSummary}">
+                                                            ${order.itemsSummary}
+                                                        </td>
+                                                        <td><strong>NPR ${order.totalAmount}</strong></td>
+                                                        <td><span
+                                                                style="text-transform: uppercase; font-size: 0.85rem; font-weight: bold; background-color: rgba(255,255,255,0.05); padding: 0.2rem 0.5rem; border-radius: 4px;">${order.paymentMethod}</span>
+                                                        </td>
+
+                                                        <td style="font-size: 0.85rem; line-height: 1.45;">
+                                                            <div style="font-weight: 700;">${order.streetAddress},
+                                                                ${order.city}
+                                                            </div>
+                                                            <div style="color: var(--text-muted);">${order.postalCode} |
+                                                                Phone:
+                                                                ${order.phone}</div>
+                                                            <div style="font-style: italic; color: var(--text-muted);">
+                                                                ${order.email}</div>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:choose>
+                                                                <c:when test="${order.status == 'DELIVERED'}">
+                                                                    <span
+                                                                        class="status-badge status-delivered">DELIVERED</span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <span
+                                                                        class="status-badge status-processing">PROCESSING</span>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </td>
+
+                                                        <td>
+                                                            <c:if test="${order.status != 'DELIVERED'}">
+                                                                <form action="${pageContext.request.contextPath}/admin"
+                                                                    method="post" style="margin: 0;">
+                                                                    <input type="hidden" name="action"
+                                                                        value="confirmDelivery">
+                                                                    <input type="hidden" name="orderId"
+                                                                        value="${order.id}">
+                                                                    <button type="submit" class="btn btn-outline"
+                                                                        style="padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: bold; border-color: #ffa502; color: #ffa502;">
+                                                                        Confirm Delivery
+                                                                    </button>
+                                                                </form>
+                                                            </c:if>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>
                                             </c:otherwise>
