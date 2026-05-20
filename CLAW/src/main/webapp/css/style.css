@@ -1,0 +1,587 @@
+/* 
+    CLAW STREETWEAR - GLOBAL DESIGN SYSTEM
+    Main stylesheet for the e-commerce platform.
+    Uses a dark-themed aesthetic with red accents.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    /* Color Tokens */
+    --bg-color: #121212;
+    /* Main background */
+    --card-bg: #1e1e1e;
+    /* Card and form background */
+    --text-color: #ffffff;
+    /* Primary text */
+    --text-muted: #a0a0a0;
+    /* Secondary/Muted text */
+    --accent: #ff4757;
+    /* Brand color (Red) */
+    --border: #333333;
+    /* Subtle divider lines */
+}
+
+/* CSS RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- NAVIGATION BAR --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background-color: rgba(18, 18, 18, 0.95);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    /* Keep navbar at top during scroll */
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Blending the logo image with the dark background */
+.logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: invert(1);
+    mix-blend-mode: screen;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+/* Nav Link Hover Animation (Underline effect) */
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.cart-count {
+    background-color: var(--accent);
+    color: white;
+    border-radius: 50%;
+    padding: 0.1rem 0.5rem;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+}
+
+/* --- LOGOUT INDICATION BOX --- */
+.nav-links a.logout-btn {
+    border: 1px solid var(--accent);
+    color: var(--accent) !important;
+    padding: 0.35rem 0.9rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -0.2rem;
+    /* Vertically align with raw text links */
+}
+
+.nav-links a.logout-btn:hover {
+    background-color: var(--accent);
+    color: white !important;
+    box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+    transform: translateY(-1px);
+}
+
+.nav-links a.logout-btn::after {
+    display: none;
+    /* Disable default bottom-border underline animation */
+}
+
+/* --- MOBILE MENU BUTTON --- */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.mobile-menu-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Animation for active hamburger (turns into X) */
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* --- MAIN LAYOUT --- */
+main {
+    flex: 1;
+    padding: 3rem 5%;
+}
+
+/* --- HERO SECTION (Homepage Only) --- */
+.hero {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(18, 18, 18, 0.7), rgba(18, 18, 18, 0.9)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+    border-radius: 10px;
+    margin-bottom: 3rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    max-width: 600px;
+}
+
+/* --- BUTTON SYSTEM --- */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    text-decoration: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* --- FILTERS (Shop Page) --- */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Allows buttons to stack on small screens */
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+/* --- PRODUCT GALLERY --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+/* --- SINGLE PRODUCT VIEW --- */
+.single-product {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+}
+
+.single-product-image {
+    flex: 1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.single-product-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.single-product-details {
+    flex: 1;
+}
+
+.single-product-details h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.single-product-details .price {
+    font-size: 2rem;
+    color: var(--accent);
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+/* --- TABLE RESPONSIVE WRAPPER --- */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    background-color: var(--card-bg);
+}
+
+.cart-table,
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td,
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-muted);
+}
+
+/* --- AUTHENTICATION FORMS (Login/Register) --- */
+.auth-container {
+    max-width: 400px;
+    margin: 4rem auto;
+    padding: 2.5rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border);
+}
+
+.auth-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* --- STATUS MESSAGES --- */
+.error-msg {
+    color: #ff4757;
+    background-color: rgba(255, 71, 87, 0.1);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 71, 87, 0.3);
+}
+
+.success-msg {
+    color: #2ed573;
+    background-color: rgba(46, 213, 115, 0.1);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border: 1px solid rgba(46, 213, 115, 0.3);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    color: var(--text-muted);
+}
+
+/* --- [MOBILE ONLY] RESPONSIVE BREAKPOINTS (Max-width: 768px) --- */
+@media (max-width: 768px) {
+
+    /* MOBILE: Reduced navbar padding */
+    .navbar {
+        padding: 1rem 5%;
+    }
+
+    /* MOBILE: Scale down header text & logo image */
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .logo img {
+        height: 35px;
+    }
+
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.6rem !important;
+    }
+
+    /* MOBILE: Show hamburger menu button */
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    /* MOBILE: Overriding nav-links to become a slide-out sidebar */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Initially hidden off-screen */
+        width: 70%;
+        height: 100vh;
+        background-color: var(--card-bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        transition: 0.5s ease;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        z-index: 1050;
+    }
+
+    /* MOBILE: Shows the sidebar when 'show' class is added via JS */
+    .nav-links.show {
+        right: 0;
+    }
+
+    /* MOBILE: Larger font for easy tapping */
+    .nav-links a {
+        font-size: 1.5rem;
+    }
+
+    /* MOBILE: Style the Logout Indication Box on mobile to look like a premium pill button */
+    .nav-links a.logout-btn {
+        font-size: 1.3rem;
+        padding: 0.6rem 2rem;
+        width: 80%;
+        text-align: center;
+        margin-top: 0;
+        /* Reset desktop negative margin */
+        border-radius: 30px;
+        /* Gorgeous pill-shaped button on mobile */
+    }
+
+    /* MOBILE: Stack product images and details vertically */
+    .single-product {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* MOBILE: Reduced font sizes for smaller screens */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* MOBILE: Enable horizontal scroll for wide tables (Cart/Admin) */
+    .cart-table,
+    .admin-table {
+        display: table !important;
+        width: 100% !important;
+        min-width: 800px !important;
+        /* Force a minimum width to enable horizontal scroll inside the wrapper */
+        white-space: nowrap;
+    }
+}
